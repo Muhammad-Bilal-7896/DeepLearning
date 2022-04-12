@@ -1,8 +1,33 @@
 import Head from "next/head";
-import '../styles/globals.css'
+import '../styles/globals.css';
+
+import { ChakraProvider } from '@chakra-ui/react';
+
+// 1. Import the utilities
+import { extendTheme } from '@chakra-ui/react';
+
+import Fonts from "../Fonts";
+
+// 2. Update the breakpoints as key-value pairs
+const breakpoints = {
+  sm: '400px',
+  md: '768px',
+  lg: '960px',
+  xl: '1200px',
+  '2xl': '1536px',
+}
+
+// 3. Extend the theme
+const theme = extendTheme({
+  breakpoints,
+  fonts: {
+    heading: "Nunito",
+    body: "Nunito",
+  },
+})
 
 function MyApp({ Component, pageProps }) {
-  <>
+  return <>
     <Head>
       <meta charSet="utf-8" />
       <meta name="description" content="DeepLearningWork" />
@@ -19,12 +44,13 @@ function MyApp({ Component, pageProps }) {
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
-      
+
       <title>Deep learning with tensorflow</title>
     </Head>
-    <Provider store={store}>
+    <ChakraProvider resetCSS theme={theme}>
+      <Fonts />
       <Component {...pageProps} />
-    </Provider>
+    </ChakraProvider>
   </>
 }
 
